@@ -1,0 +1,8 @@
+
+App Thinning Size Report for All Variants of The 2 Become 1
+
+Variant: The 2 Become 1-2550D665-8BB0-4EE0-9CD4-8D1A720BEBFE.ipa
+Supported variant descriptors: [device: iPhone11,8, os-version: 12]
+App + On Demand Resources size: 15.3 MB compressed, 29.2 MB uncompressed
+App size: 15.3 MB compressed, 29.2 MB uncompressed
+On Demand Resources size: Zero KB compressed, Zero KB uncompressed

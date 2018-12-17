@@ -13,10 +13,11 @@ class MenuContainerView: UIView {}
 class DarkContainerView: UIView {}
 
 enum State {
-    case profile, store
+    case couple, store, guest
 }
 
 class BaseSlidingController: UIViewController {
+
    
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
@@ -58,7 +59,7 @@ class BaseSlidingController: UIViewController {
 
     // MARK:- Fileprivate
     fileprivate func setState(){
-        var state = appDelegate.state
+        let state = appDelegate.state
         print("SET STATE: ", state)
     }
     
@@ -153,7 +154,7 @@ class BaseSlidingController: UIViewController {
         
     }
     
-    lazy var menuController = appDelegate.state == .profile ? MenuController() : ChatroomMenuContainerController()
+    lazy var menuController = appDelegate.state == .couple ? MenuController() : ChatroomMenuContainerController()
   
     var rightViewController: UIViewController =  MainTabBarController()
     
@@ -198,6 +199,7 @@ class BaseSlidingController: UIViewController {
         rightContainerTrailingConstraint = rightContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         rightContainerTrailingConstraint.isActive = true
         
+        
         setupViewControllers()
     }
     
@@ -231,7 +233,6 @@ class BaseSlidingController: UIViewController {
             darkCoverView.trailingAnchor.constraint(equalTo: rightContainer.trailingAnchor),
             
         ])
-        
         addChild(rightViewController)
         addChild(menuController)
     }

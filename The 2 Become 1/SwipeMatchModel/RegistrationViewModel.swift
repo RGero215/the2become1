@@ -9,7 +9,12 @@
 import UIKit
 import Firebase
 
+protocol StoreRegistrationControllerDelegate {
+    func didFinishLoggingIn()
+}
+
 class RegistrationViewModel {
+    var delegate: StoreRegistrationControllerDelegate?
     var bindableIsRegistering = Bindable<Bool>()
     var bindableImage = Bindable<UIImage>()
     var bindableIsFormValid = Bindable<Bool>()
@@ -43,7 +48,14 @@ class RegistrationViewModel {
             }
             print("Successfully register store:", res?.user.uid ?? "")
             
-            self.saveImageToFirebase(completion: completion)
+            guard let baseSlidingController = UIApplication.shared.keyWindow?.rootViewController as? BaseSlidingController else {return}
+            baseSlidingController.dismiss(animated: true, completion: {
+                self.delegate?.didFinishLoggingIn()
+                self.saveImageToFirebase(completion: completion)
+            })
+            
+            
+            
             
         }
     }
@@ -77,14 +89,6 @@ class RegistrationViewModel {
     fileprivate func saveInfoToFirestore(imageUrl: String, completion: @escaping (Error?) -> ()){
         let uid = Auth.auth().currentUser?.uid ?? ""
         let docData = ["storeName": storeName ?? "", "uid": uid, "imageUrl1": imageUrl]
-//        Firestore.firestore().collection("stores").document(uid).setData(docData) { (err) in
-//            if let err = err {
-//                completion(err)
-//                return
-//            }
-//            completion(nil)
-        
-//        }
         
         Database.database().reference().child("stores").child(uid).setValue(docData)
     }

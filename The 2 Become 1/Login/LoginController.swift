@@ -69,13 +69,13 @@ class LoginController: UIViewController {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(.white, for: .normal)
         
-        button.addTarget(self, action: #selector(handleGoToLogin), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         button.isEnabled = false
         
         return button
     }()
     
-    @objc func handleGoToLogin(){
+    @objc func handleLogin(){
         guard let email = emailTextField.text else {return}
         guard let password = passwordTextField.text else {return}
         
@@ -86,15 +86,12 @@ class LoginController: UIViewController {
             }
             print("Successfully logged back in with user:", user?.user.uid ?? "")
             
-            self.dismiss(animated: true, completion: {
-                print("working")
+            
+            guard let baseSlidingController = UIApplication.shared.keyWindow?.rootViewController as? BaseSlidingController else {return}
+            baseSlidingController.dismiss(animated: true, completion: {
                 self.delegate?.didFinishLoggingIn()
             })
-            
-//            guard let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else {return}
-//            mainTabBarController.setupViewControllers()
-//            self.present(mainTabBarController, animated: true, completion: nil)
-//            self.dismiss(animated: true, completion: nil)
+
         }
     }
     

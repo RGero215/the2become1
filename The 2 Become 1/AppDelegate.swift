@@ -13,7 +13,7 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
-    var state = State.profile
+    var state = State.couple
     
 
 

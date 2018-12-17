@@ -9,7 +9,13 @@
 import UIKit
 import Firebase
 
+protocol UserSignUpControllerDelegate {
+    func didFinishLoggingIn()
+}
+
 class SignUpController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    var delegate: UserSignUpControllerDelegate?
+    
     let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "plus_photo").withRenderingMode(.alwaysOriginal), for: .normal)
@@ -163,10 +169,15 @@ class SignUpController: UIViewController, UINavigationControllerDelegate, UIImag
                         }
                         print("Successfully saved user info to db")
                         
-                        guard let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else {return}
-                        
-                        mainTabBarController.setupViewControllers()
-                        self.dismiss(animated: true, completion: nil)
+//                        guard let mainTabBarController = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else {return}
+//
+//                        mainTabBarController.setupViewControllers()
+//                        self.dismiss(animated: true, completion: nil)
+                        guard let baseSlidingController = UIApplication.shared.keyWindow?.rootViewController as? BaseSlidingController else {return}
+                        baseSlidingController.dismiss(animated: true, completion: {
+                            self.delegate?.didFinishLoggingIn()
+                        })
+
                     })
                 }
             }

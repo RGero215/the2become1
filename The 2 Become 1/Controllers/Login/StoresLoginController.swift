@@ -77,10 +77,12 @@ class StoresLoginController: UIViewController {
             }
             
             print("Logged in successfully ===>")
-            self.dismiss(animated: true, completion: {
-                print("working")
+            
+            guard let baseSlidingController = UIApplication.shared.keyWindow?.rootViewController as? BaseSlidingController else {return}
+            baseSlidingController.dismiss(animated: true, completion: {
                 self.delegate?.didFinishLoggingIn()
             })
+            
         }
     }
     

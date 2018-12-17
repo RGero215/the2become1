@@ -135,12 +135,7 @@ class RegistrationController: UIViewController {
         setupRegistrationViewModelObserver()
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        navigationController?.isNavigationBarHidden = false
-//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleCancel))
-//        navigationController?.navigationBar.tintColor = .gold()
-//    }
+
     
     //MARK:- Private
     let registrationViewModel = RegistrationViewModel()

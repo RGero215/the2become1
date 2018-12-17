@@ -88,7 +88,7 @@ class RegistrationViewModel {
     
     fileprivate func saveInfoToFirestore(imageUrl: String, completion: @escaping (Error?) -> ()){
         let uid = Auth.auth().currentUser?.uid ?? ""
-        let docData = ["storeName": storeName ?? "", "uid": uid, "imageUrl1": imageUrl]
+        let docData = ["storeName": storeName ?? "", "uid": uid, "imageUrl1": imageUrl, "state": "store"]
         
         Database.database().reference().child("stores").child(uid).setValue(docData)
     }
